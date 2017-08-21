@@ -1,12 +1,5 @@
-//Liri takes the following arguments
-// * my-tweets
-// * spotify-this-song
-// * movie-this
-// * do-what-it-says
-
-//these add other programs to this one
 var dataKeys = require("./keys.js");
-var fs = require('fs'); //file system
+var fs = require('fs');
 var twitter = require('twitter');
 var spotify = require('spotify');
 var request = require('request');
@@ -23,15 +16,11 @@ var writeToLog = function(data) {
     console.log("log.txt was updated!");
   });
 }
-
-//Creates a function for finding artist name from spotify
 var getArtistNames = function(artist) {
   return artist.name;
 };
 
-//Function for finding songs on Spotify
 var getMeSpotify = function(songName) {
-  //If it doesn't find a song, find Blink 182's What's my age again
   if (songName === undefined) {
     songName = 'What\'s my age again';
   };
@@ -43,7 +32,7 @@ var getMeSpotify = function(songName) {
     }
 
     var songs = data.track;
-    var data = []; //empty array to hold data
+    var data = [];
 
     for (var i = 0; i < songs.length; i++) {
       data.push({
@@ -67,7 +56,7 @@ var getTweets = function() {
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
     if (!error) {
-      var data = []; //empty array to hold data
+      var data = [];
       for (var i = 0; i < tweets.length; i++) {
         data.push({
             'created at: ' : tweets[i].created_at,
@@ -145,8 +134,6 @@ var pick = function(caseData, functionData) {
       console.log('LIRI doesn\'t know that');
   }
 }
-
-//run this on load of js file
 var runThis = function(argOne, argTwo) {
   pick(argOne, argTwo);
 };
